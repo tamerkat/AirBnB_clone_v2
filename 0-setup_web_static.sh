@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
-# script bash
 
 sudo apt-get update
 sudo apt-get install -y nginx
+sudo service nginx start
 
 sudo ufw allow 'Nginx HTTP' 
 
-sudo mkdir -p /data
-sudo mkdir -p /data/web_static
-sudo mkdir -p /data/web_static/releases/
-sudo mkdir -p /data/web_static/shared/
-sudo mkdir -p /data/web_static/releases/test/
+sudo mkdir -p "/data/web_static/releases/test/" "/data/web_static/shared/"
+
 sudo touch /data/web_static/releases/test/index.html
 
 sudo chown -hR ubuntu:ubuntu "/data/"
+
+echo "<h1>Hello World!</h1>" | sudo tee "/data/web_static/releases/test/index.html"
 
 if [ -L /data/web_static/current ]; then
     rm /data/web_static/current
@@ -31,5 +30,4 @@ printf %s "server {
 }" > /etc/nginx/sites-available/default
 
 
-sudo systemctl restart nginx
 sudo service nginx restart

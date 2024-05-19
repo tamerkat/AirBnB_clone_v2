@@ -13,7 +13,7 @@ sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test/
 sudo touch /data/web_static/releases/test/index.html
 
-sudo chown -R ubuntu:ubuntu /data/
+sudo chown -R ubuntu:ubuntu "/data/"
 
 if [ -L /data/web_static/current ]; then
     rm /data/web_static/current

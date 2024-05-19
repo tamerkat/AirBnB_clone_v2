@@ -1,25 +1,32 @@
 #!/usr/bin/env bash
 # script bash
-
 sudo apt-get update
 sudo apt-get install -y nginx
 sudo service nginx start
 
 sudo ufw allow 'Nginx HTTP' 
 
-sudo mkdir -p "/data/web_static/releases/test/" "/data/web_static/shared/"
+sudo mkdir -p /data
+sudo chown -R /data
+sudo mkdir -p /data/web_static
+sudo mkdir -p /data/web_static/releases/
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
 
 sudo touch /data/web_static/releases/test/index.html
 
-echo "<h1>Hello World!</h1>" | sudo tee "/data/web_static/releases/test/index.html"
+sudo echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
-sudo chown -hR ubuntu:ubuntu "/data/"
 
-if [ -L /data/web_static/current ]; then
-    rm /data/web_static/current
-fi
-ln -s /data/web_static/releases/test/ /data/web_static/current
+ln -sf /data/web_static/releases/test/ /data/web_static/current
 
+sudo chown -R ubuntu:ubuntu /data/
 
 printf %s "server {
     listen 80;

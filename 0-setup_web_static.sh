@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# script bash
 
 sudo apt-get update
 sudo apt-get install -y nginx
@@ -10,9 +11,9 @@ sudo mkdir -p "/data/web_static/releases/test/" "/data/web_static/shared/"
 
 sudo touch /data/web_static/releases/test/index.html
 
-sudo chown -hR ubuntu:ubuntu "/data/"
-
 echo "<h1>Hello World!</h1>" | sudo tee "/data/web_static/releases/test/index.html"
+
+sudo chown -hR ubuntu:ubuntu "/data/"
 
 if [ -L /data/web_static/current ]; then
     rm /data/web_static/current
